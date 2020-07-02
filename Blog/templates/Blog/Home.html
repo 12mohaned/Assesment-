@@ -1,0 +1,47 @@
+{% extends "Blog/base.html" %}
+{% block content %}
+{% if user.is_authenticated %}
+  {% for i in NewFeeds %}
+  <div class="col s12 m7">
+   <h2 class="header">{{i.Title}}</h2>
+   <div class="card horizontal">
+     <div class="card-stacked">
+       <div class="card-content">
+        <p>{{i.Content}}</p>
+       </div>
+       <div class="card-action">
+         <a style="color:darkblue">Post by : {{i.User}}</a>
+       </div>
+     </div>
+   </div>
+ </div>
+  <div id = "{{i.Title}}" name = "{{i.Title}}">
+    <h4>Comments :</h4>
+  </div>
+  {% for comment in Comments %}
+  {% if comment.Post == i  %}
+  <div class="col s12 m7">
+   <div class="card horizontal">
+     <div class="card-stacked">
+       <div class="card-content">
+         <p>{{comment.Content}}</p>
+       </div>
+       <div class="card-action ">
+         <a style="color:darkblue" href="#">Comment by {{comment.User_Comment}}</a>
+       </div>
+     </div>
+   </div>
+ </div>
+    {% endif %}
+  {% endfor %}
+  <form method = "post">
+    {% csrf_token %}
+      {{CommentForm.as_p}}
+  <input class ="btn btn-danger blue darken-3" type = "submit" value ="Comment" name = "{{i.Title}}" > </input>
+  </form>
+      <br>
+  {% endfor %}
+  {% endif %}
+  <style>
+    </style>
+{% endblock %}

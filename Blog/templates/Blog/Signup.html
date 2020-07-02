@@ -1,0 +1,8 @@
+{% extends "Blog/base.html" %}
+{% block content %}
+<form method = "post">
+  {% csrf_token %}
+  {{Form.as_p}}
+  <button type="submit" class="btn btn-primary blue darken-1">Sign up</button>
+  </form>
+{% endblock %}

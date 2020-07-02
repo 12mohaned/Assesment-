@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <!-- Prism CSS -->
+    <link href="{% static "tinymce/css/prism.css" %}" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript for Materialize CSS -->
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<body>
+<nav>
+    <div class="nav-wrapper blue darken-3">
+      {% if user.is_authenticated%}
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href= "/Home"> <i class="material-icons">home</i></a></li>
+        <li><a href= "/Profile">{{user.username}}</a></li>
+        <li><a href = "/posts">Posts</a></li>
+        <li><a href = "/Logout">log out</a></li>
+        </ul>
+      {% else %}
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href= "/Login">log in</a></li>
+        <li><a href = "/Signup">Sign up</a></li>
+          </ul>
+      {% endif %}
+    </div>
+  </nav>
+</body>
+<div class="container ">
+<br>
+<br>
+{% block content %}
+{% endblock %}
+</div>
+</style>
+</html>

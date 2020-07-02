@@ -1,0 +1,40 @@
+{% extends "Blog/base.html" %}
+{% block content %}
+<h2 id = "Title">What's on your mind</h2>
+<form method = "post">
+  {% csrf_token %}
+  {{Post.as_p}}
+  <div id = "Button">
+  <button type="submit" class="btn btn-primary blue darken-3">Create Post</button>
+  </div>
+  </form>
+
+  <h4 id ="Notify">Notifications</h4>
+  <div id = "Collection">
+  <ul class="collection with-header">
+    {% for comment in Comments %}
+    {% if request.user.username != comment.User_Comment %}
+    <li>Your Recieved a Comment from {{comment.User_Comment}} on the following post{{comment.Post}}</li>
+    {% endif %}
+    {% endfor %}
+    </ul>
+    </div>
+  <style>
+    #Title{
+      margin-left:25%;
+      color:black;
+    }
+    #Button{
+      margin-left:42%;
+    }
+    #Collection{
+      margin-left:24%;
+      margin-top:4%;
+      width : 55%;
+    }
+    #Notify{
+      margin-left:39%;
+      margin-top:5%;
+    }
+    </style>
+{% endblock %}
